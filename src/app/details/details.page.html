@@ -1,0 +1,58 @@
+<ion-header>
+  <div style="display: block; float: right; margin-bottom: 25px;">
+    <div style="display: inline-block;">
+      <!-- <p style="line-height: 10px; color: #30DBD0;">Fri 12 jan</p> -->
+      <h3 style="line-height: 10px; color: #282B4C;">Hello, Oqupi</h3>
+    </div>
+    <div style=" display: inline-block;margin-right: 50px;margin-top: 11px;">
+      <img src="../../assets/icon/436-4363443_view-user-icon-png-font-awesome-user-circle.png" width="80px"
+        style="padding:0 10px;">
+    </div>
+  </div>
+</ion-header>
+
+<ion-content style="background-color: #282B4C; margin-top: 10px; border-radius: 0px 0px 0 0;">
+
+  <div style="
+  display: flex;
+  justify-content: space-evenly;">
+    <div style="flex: 1; display: grid;">
+      <ion-card style="background-color: #353767;" *ngIf="chartOptions">
+        <ion-card-content style="padding: 0;">
+          <div id="chart">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+              [yaxis]="chartOptions.yaxis" [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid">
+            </apx-chart>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card style="background-color: #353767;" *ngIf="chartOptions1">
+        <ion-card-content style="padding: 0;">
+          <div id="chart1">
+            <apx-chart [series]="chartOptions1.series" [chart]="chartOptions1.chart" [xaxis]="chartOptions1.xaxis"
+              [yaxis]="chartOptions1.yaxis" [dataLabels]="chartOptions1.dataLabels" [grid]="chartOptions1.grid">
+            </apx-chart>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card style="background-color: #353767;" *ngIf="chartOptions2">
+        <ion-card-content style="padding: 0;">
+          <div id="chart2">
+            <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart" [xaxis]="chartOptions2.xaxis"
+              [yaxis]="chartOptions2.yaxis" [dataLabels]="chartOptions2.dataLabels" [grid]="chartOptions2.grid">
+            </apx-chart>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card style="background-color: #353767;" *ngIf="chartOptions3">
+        <ion-card-content style="padding: 0;">
+          <div id="chart3">
+            <apx-chart [series]="chartOptions3.series" [chart]="chartOptions3.chart" [xaxis]="chartOptions3.xaxis"
+              [yaxis]="chartOptions3.yaxis" [dataLabels]="chartOptions3.dataLabels" [grid]="chartOptions3.grid">
+            </apx-chart>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

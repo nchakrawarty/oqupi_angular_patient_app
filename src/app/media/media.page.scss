@@ -1,0 +1,22 @@
+ion-card.ion-color .ion-inherit-color, ion-card-header.ion-color .ion-inherit-color {
+    color: inherit;
+    text-align: center;
+}
+
+// img {
+//     max-width: 100%;
+//     border: 0;
+//     height: 100px;
+//     padding: 0px;
+//     max-height: 200px;
+// }
+.leftborder{
+    height: -webkit-fill-available;
+    width: 10px;
+    position: absolute;
+    left: 0;
+    /* display: none; */
+    top: 0;
+    border-radius: 0px;
+    background-color: #2cdbcf85;
+  }

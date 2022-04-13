@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Image Upload
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content padding>
+  <h3 *ngIf="images.length == 0" text-center>Please Select Image!</h3>
+
+  <ion-list>
+    <ion-item *ngFor="let img of images; index as pos" text-wrap>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="img.path"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        {{ img.name }}
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="startUpload(img)">
+        <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content> -->
+<ion-content>
+
+  <!-- <label class="image-upload-container btn btn-bwm">
+    <span>Select Image</span>
+    <input #imageInput type="file" accept="image/*" (change)="processFile($event)">
+  </label> -->
+
+
+  <!-- <div *ngIf="selecteImage" class="img-preview-container">
+
+    <div class="img-preview{{selecteImage.status === 'fail' ? '-error' : ''}}"
+      [ngStyle]="{'background-image': 'url('+ selecteImage.src + ')'}">
+    </div>
+
+    <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+      <div class="img-spinning-circle"></div>
+    </div>
+
+    <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+    <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+  </div> -->
+  <img [src]="selecteImage" (click)="onSelectImage($event)" />
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <!-- <input #imageInput type="file" (change)="imageInputChange($event)" accept="image/*"> -->
+    <ion-button color="tertiary" *ngIf="selecteImage" (click)="uploadFile()">Upload</ion-button>
+    <ion-button color="danger" *ngIf="selecteImage" (click)="deletephoto()">Delete</ion-button>
+    <ion-button><input #imageInput type="file" accept="image/*" (change)="processFile($event)"></ion-button>
+    <ion-button fill="clear" expand="full" color="light" (click)="takephoto()">
+      <ion-icon slot="start" name="camera"></ion-icon> Take Photo
+    </ion-button>
+    <!-- <ion-button fill="clear" expand="full" color="light" (click)="selectImage()">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Select Image
+    </ion-button> -->
+  </ion-toolbar>
+</ion-footer>

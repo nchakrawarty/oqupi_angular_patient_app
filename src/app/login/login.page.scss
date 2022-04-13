@@ -1,0 +1,30 @@
+// ion-item{
+//     --background: #3880ff;
+//     --color: #fff;
+// }
+ion-button{
+    --background: #062f77;
+}
+ion-content.background {
+    --background: url(../../assets/Landing-page.png) 0 0/100% 100% no-repeat;
+    // background-size: contain; background-repeat: no-repeat;
+}
+// a{
+//     color: #fff;
+// }
+:host#background-content {
+    left: 0px;
+    right: 0px;
+    top: calc(var(--offset-top) * -1);
+    bottom: calc(var(--offset-bottom) * -1);
+    position: absolute;
+    background: transparent;
+}
+// .native-input.sc-ion-input-md {
+//     background: #fff;
+//     color: #1a1a1a;
+// }
+// .native-input.sc-ion-input-md:invalid {
+//     color: #F02D3A;
+//     background: #fff;
+// }

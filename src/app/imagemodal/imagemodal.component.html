@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+     
+      <span (click) = "closeModal()">&larr; Back To Media</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+​
+<ion-content>
+  <ion-grid style="padding-bottom: 5px">
+    <ion-row>
+      <ion-col *ngIf="!images">
+        Loading....
+      </ion-col>
+      <ion-col *ngIf="images">
+        <img src="{{urls.FILES}}/images/download/{{images.name}}">
+        <a href="{{urls.FILES}}/images/download/{{images.name}}" download> Download
+        </a>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-button color="primary" size="large" (click)="download(images.name)">Download</ion-button> -->
+    <ion-button color="danger" size="large" (click)="presentAlert(images.name)">Delete</ion-button>
+    ​
+  </ion-grid>
+  <!-- <div *ngFor="let im of images; let i =index">
+    <img src="http://134.209.155.253/api/files/images/download/{{im.name}}">
+  </div> -->
+</ion-content>

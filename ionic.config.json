@@ -1,0 +1,8 @@
+{
+  "name": "Oqupi",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

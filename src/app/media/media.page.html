@@ -1,0 +1,63 @@
+<ion-header *ngIf="ActiveUser">
+  <div style="display: flex;align-items: center; margin: 10px;justify-content: space-between;">
+    <div style="display: flex;align-items: center;">
+      <img src="../../assets/patient-1.png" width="40px">
+      <h3 style="line-height: 10px; font-size: 12px;margin: 5px; text-transform: capitalize;">Welcome,
+        {{ActiveUser?.AccountName}} ({{ActiveUser?.role}})
+      </h3>
+    </div>
+    <div>
+      <ion-icon size="large" name="notifications-outline"></ion-icon>
+    </div>
+  </div>
+</ion-header>
+<ion-content style="margin-top: 10px;">
+  <ion-refresher spellcheck="z-index:9999" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200"
+    (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card color="transparent" style="box-shadow: none;">
+    <ion-card-content>
+      <div style="display: flex;justify-content: center;position: relative;top: 110px;z-index: 99;">
+        <span>
+          <img src="../../assets/patient-1.png" width="140px">
+          <h4 style="text-align: center;font-weight: bold;">Name</h4>
+        </span>
+      </div>
+      <ion-card color="medium" style="padding-top: 120px;">
+        <ion-card-content>
+          <div style="border-bottom: 1px solid;margin-bottom: 10px;">
+            <span>Contact<br> <span style="font-weight: bold;"> {{ActiveUser?.mobile}}</span>
+              <hr>
+            </span>
+          </div>
+          <div>
+            <span>Email<br>
+              <span style="font-weight: bold;">{{ActiveUser?.email}}</span>
+              <hr>
+            </span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+  <ion-card color="primary" (click)="LogOut()">
+    <ion-card-header>
+      <ion-card-title style="display:flex;align-items: center;
+      justify-content: center;">
+        <ion-icon name="power" size="large" style="color: #fff;"></ion-icon> LogOut
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <!-- <div style="padding: 25px;">
+    <h3 style="color: #fff;">Activity - Notifications</h3>
+    <ion-card style="background-color: #353767; margin: 15px 0px;" *ngFor="let notif of notifications; let i =index">
+      <div class="leftborder"></div>
+      <ion-card-content>
+        <div>
+          <p style="font-size: 14px; color: #fff;">{{notif}} </p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div> -->
+</ion-content>

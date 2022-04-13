@@ -1,0 +1,111 @@
+
+table {
+    // border-collapse: collapse;
+    width: 100%;
+    border: 1px solid rgba(0, 69, 150, 0.10);
+  }
+  tr {
+//     -webkit-box-shadow: inset 0px 0px 20px 1px rgba(0, 69, 150, 0.10);
+// -moz-box-shadow: inset 0px 0px 20px 1px rgba(0, 69, 150, 0.10);
+// box-shadow: inset 0px 0px 20px 1px rgba(0, 69, 150, 0.10);
+// text-align: center;
+  }
+
+  tr:hover {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+  
+  th, td {
+    padding: 2px;
+    text-align: center;
+    // border: 1px solid #ddd;
+  }
+  td{
+      padding: 2px;
+  }
+  p{
+    font-size: 12px;
+  }
+  .one,.two {
+    height: 200px;
+    width: 2px;
+    background-color: transparent;
+  }
+  .one {
+    width: 1px;
+  }
+  .rotationimage{
+    width: 140px;
+  }
+  .patientCard, .doctorCard {
+  h2 {
+    // color: #2EB2B6;
+  }
+   p {
+    // color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+   }
+    span {
+      padding-left: 25px;
+      // color: #2EB2B6;
+      font-size: 15px;
+    }
+  }
+  .leftborder{
+    height: -webkit-fill-available;
+    width: 10px;
+    position: absolute;
+    left: 0;
+    /* display: none; */
+    top: 0;
+    border-radius: 0px;
+    // background-color: #2cdbcf85;
+  }
+  .rightborder{
+    height: -webkit-fill-available;
+    width: 10px;
+    position: absolute;
+    right: 0;
+    /* display: none; */
+    top: 0;
+    border-radius: 0px;
+    // background-color: #2cdbd0;
+  }
+  div.cardcon, span.cardcon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+.cardcon p {
+  margin-left: 10px;
+  opacity: 0.85;
+}
+ion-card.patList {
+  // background-color: #fff;
+  flex: 1;
+  margin: 5px 5px;
+}
+.cls-1, .cls-2 {
+  // fill:#30DBD0;
+}
+// .neck,.shoulder,.knee {
+//   fill : red;
+// }
+.topappoint {
+  display: flex; align-items: center; width: 100%;justify-content: space-evenly; margin-bottom: 20px;
+  span {
+  background: var(--ion-color-medium-tint);
+  margin: 5px;
+  // border: 1px solid;
+  font-size: 12px;
+  border-radius: 3px;
+  color: var(--ion-color-dark-tint);
+  padding: 12px;
+}
+span:nth-child(1) {
+  // background:#30dbd0;
+}
+}

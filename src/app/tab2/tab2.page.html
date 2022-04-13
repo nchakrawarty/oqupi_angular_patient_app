@@ -1,0 +1,160 @@
+<ion-header *ngIf="ActiveUser">
+  <div style="display: flex;align-items: center; margin: 10px;justify-content: space-between;">
+    <div style="display: flex;align-items: center;">
+      <img src="../../assets/patient-1.png" width="40px">
+      <h3 style="line-height: 10px; font-size: 12px;margin: 5px; text-transform: capitalize;">Welcome,
+        {{ActiveUser?.AccountName}} ({{ActiveUser?.role}})
+      </h3>
+    </div>
+    <div>
+      <ion-icon size="large" name="notifications-outline"></ion-icon>
+    </div>
+  </div>
+</ion-header>
+<ion-content style="margin-top: 10px;">
+  <ion-refresher spellcheck="z-index:9999" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200"
+    (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="addpc">
+    <ion-card style="background-color: transparent; box-shadow: none;" *ngIf="ActiveUser.role == 'Patient'">
+      <ion-card-content style="padding: 0; display: flex;">
+        <span style="width: 15%;"></span>
+        <ion-card class="patList" color="medium">
+          <ion-card-content style=" padding: 10px;">
+            <p style="font-size: 0.7em;" color="medium-shade">Active Patients <br> <span color="dark"
+                style="font-size: 2.5em; font-weight: bolder;">{{patientList?.length}}</span> <br> <span
+                style="color: green;">5.25% <ion-icon style="font-size: 8px;" name="triangle"></ion-icon></span> </p>
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="patList" color="medium">
+          <ion-card-content style="padding: 10px;">
+            <p style="font-size: 0.7em;" color="medium-shade">Total Patients <br> <span color="dark"
+                style="font-size: 2.5em; font-weight: bolder;">{{patientList?.length}}</span> <br> <span
+                style="color: green;">3.25%<ion-icon style="font-size: 8px;" name="triangle"></ion-icon></span></p>
+          </ion-card-content>
+        </ion-card>
+        <span style="width: 15%;"></span>
+        <!-- <ion-card class="patList" color="medium">
+        <ion-card-content style=" padding: 10px;">
+          <p style="font-size: 0.7em;" color="medium-shade">New Patients <br> <span color="dark"
+              style="font-size: 2.5em; font-weight: bolder;">8</span> <br> <span style="color: red;">-2.25%<ion-icon
+                style="font-size: 8px; -ms-transform: rotate(180deg); 
+                transform: rotate(180deg);" name="triangle"></ion-icon></span></p>
+        </ion-card-content>
+      </ion-card> -->
+      </ion-card-content>
+    </ion-card>
+    <div style="display: flex;align-items: center;justify-content: space-between; margin: 0px 10px;">
+      <p style="padding: 0px 10px; font-size: 1em; font-weight: bold;">Select Date</p>
+
+      <ion-datetime (ionChange)="calcStartEndTime($event)"
+        style="font-size: 10px;font-weight: bold;color: #fff;padding: 8px;background: var(--ion-color-tertiary);border-radius: 20px;"
+        placeholder="View Calendar" [value]="td">
+      </ion-datetime>
+    </div>
+    <div class="topappoint">
+      <span class="chdt" *ngFor="let dt of appointmentDateView; let i = index;" (click)=changeDate($event,dt,i);
+        [id]="i">{{dt
+        | date:'dd'}}</span>
+    </div>
+    <ion-card *ngFor="let pat of appointmentList; let i =index" color="medium"
+      style="flex: 1; margin: 5px 10px 10px 10px;">
+      <ion-card-content style="padding:0px; border-left: 10px solid;border-color: var(--ion-color-danger-tint-two); ">
+        <div class="cardcon">
+          <img src="../../assets/patient-{{i+1}}.png" width="100px" style="border-radius: 50%;padding: 5%;">
+          <div>
+            <h2>{{pat.doctorName}} </h2>
+            <!-- <p style="font-size: 0.85em;">{{pat.doctorName}}</p> -->
+            <span class="cardcon">
+
+            </span>
+          </div>
+        </div>
+        <div style="display: flex;align-items: center; justify-content: flex-start;">
+          <p style="text-align: center; font-size: 0.85em; margin: 5px 10px;">
+            <ion-icon name="calendar-outline"></ion-icon><br> {{pat.appointmentDate}}
+          </p>
+          <p style="text-align: center;font-size: 0.85em;margin: 5px 10px;">
+            <ion-icon name="time-outline"></ion-icon><br> {{pat.appintmentTime}}
+          </p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-fab *ngIf="addpc" slot="fixed" style="bottom: 2px;right: 15px;">
+    <ion-fab-button color="primary" style="width: 200px;height: 40px;--border-radius: 24px;" (click)="addPat();">
+      <div style="display: flex;align-items: center;
+      justify-content: space-evenly;
+      width: 90%;font-size: 0.85em;">
+        <ion-icon name="medkit"></ion-icon><span>Request appointment</span>
+      </div>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card *ngIf="!addpc">
+    <ion-card-header>
+      Request Appointment
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card color="medium">
+        <ion-card-content style="padding: 0;overflow-y: scroll; max-height: calc(100%);">
+          <form #form="ngForm" (ngSubmit)="addAppointmentIn(form)" style="padding: 15px;">
+            <div class="formfields">
+              <!-- <ion-input style="margin-bottom: 5px;" name="details" type="text" placeholder="Observation" ngModel
+                required>
+              </ion-input> -->
+              <ion-item color="medium-tint">
+                <ion-label>Select Doctor</ion-label>
+                <ion-select [(ngModel)]="selecteddoctor" multiple="false" cancelText="Cancel" okText="Okay"
+                  name="selecteddoctor" required>
+                  <ion-select-option *ngFor="let doc of doctorList; let i=index;" [value]="doc">
+                    {{doc.doctorName}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
+            <!-- <p>Schedule an Appointment</p> -->
+            <hr>
+            <p style="display: block;">Select Date</p>
+            <div style="display: flex; align-items: center;">
+              <ion-icon name="calendar"></ion-icon>
+              <ion-datetime displayFormat="MMM DD, YYYY" name="appointmentDate" [min]="min" max="2050-12-09"
+                placeholder="{{today | date:'yyyy-MM-dd'}}" ngModel required>
+              </ion-datetime>
+            </div>
+            <p style="display: block;">Selected doctor</p>
+            <div style="display: flex; align-items: center;" *ngIf="selecteddoctor">
+              {{selecteddoctor?.doctorName}}
+              <ion-input style="margin-bottom: 5px;" name="selecteddoctor" type="text" ngModel
+                [value]="selecteddoctor?.id">
+                <!-- {{seldoc.id}} -->
+              </ion-input>
+            </div>
+            <p style="display: block;">Choose one of available time slot</p>
+            <div style="display: flex;align-items: center;flex-direction: row;flex-wrap: wrap;" *ngIf="selecteddoctor">
+              <div *ngFor="let t of timeslot; let i=index;" class="appointmnt"
+                style="border: 1px solid rgb(138, 135, 135); padding: 4px 20px; margin: 2px;font-size: 12px;"
+                [ngModel]="selection" name="appintmentTime" type="text" (click)="clickFunction($event, t,i)">
+                <span [class.highlight]="statusClass"> {{t}}</span>
+              </div>
+              <!-- <ion-div *ngFor="let t of timeslot; let i=index;"
+                  style="border: 1px solid rgb(138, 135, 135); padding: 4px 20px !important; margin: 2px;font-size: 12px;"
+                  [class]="statusClass" name="appintmentTime" type="text" placeholder="t" ngModel value="t"> {{t}}
+                  </ion-div> -->
+            </div>
+            <div style="display: grid;justify-items: stretch;justify-content: center;">
+              <ion-button style="font-size: 0.9em;" color="primary" size="large" type="submit" [disabled]="form.invalid"
+                expand="block">Place
+                Appointment</ion-button>
+              <ion-button color="light" type="button" (click)="skip()" expand="block">
+                SKIP
+              </ion-button>
+            </div>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
