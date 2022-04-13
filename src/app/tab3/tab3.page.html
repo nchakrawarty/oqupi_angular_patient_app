@@ -1,161 +1,45 @@
-<ion-header *ngIf="ActiveUser">
-  <div style="display: flex;align-items: center; margin: 10px;justify-content: space-between;">
-    <div style="display: flex;align-items: center;">
-      <img src="../../assets/patient-1.png" width="40px">
-      <h3 style="line-height: 10px; font-size: 12px;margin: 5px; text-transform: capitalize;">Welcome,
-        {{ActiveUser?.AccountName}} ({{ActiveUser?.role}})
+<ion-header *ngIf="ActiveUser" class="ion-no-border">
+  <header class="flex p-4 items-center justify-between">
+    <div class="flex items-center">
+      <img src="../../assets/patient-1.png" class="w-10 h-10 rounded-full" />
+      <h3 class="text-sm m-0 ml-2">
+        <span class="text-xs">Welcome</span>,<br />
+        <span><b> {{ActiveUser?.AccountName}}</b> ({{ActiveUser?.role}})</span>
       </h3>
     </div>
     <div>
-      <ion-icon size="large" name="notifications-outline"></ion-icon>
+      <ion-icon class="text-lg" name="notifications-outline"></ion-icon>
     </div>
-  </div>
+  </header>
 </ion-header>
-<ion-content style="margin-top: 10px;">
-  <ion-refresher spellcheck="z-index:9999" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200"
-    (ionRefresh)="doRefresh($event)">
+
+<ion-content style="margin-top: 10px">
+  <ion-refresher
+    spellcheck="z-index:9999"
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="200"
+    (ionRefresh)="doRefresh($event)"
+  >
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card style="background-color: transparent;">
-    <ion-card-content style="height: 50px;">
-      <ion-tabs>
-        <ion-tab-bar slot="top">
-          <ion-tab-button [ngClass]="appointc" (click)="appointments();">
-            <ion-label>Appointments</ion-label>
-            <!-- <ion-badge>6</ion-badge> -->
-          </ion-tab-button>
 
-          <ion-tab-button [ngClass]="doclc" (click)="docList();">
-            <ion-label>Doctor List</ion-label>
-            <!-- <ion-badge>12</ion-badge> -->
-          </ion-tab-button>
+  <section class="p-4">
+    <h6 class="m-0 font-semibold flex items-center mb-4">
+      <ion-icon name="layers-outline" class="text-lg mr-1"></ion-icon>
+      Games
+    </h6>
 
-          <ion-tab-button [ngClass]="adddc" (click)="addDoc();">
-            <ion-label>Add Doctor</ion-label>
-          </ion-tab-button>
-        </ion-tab-bar>
-      </ion-tabs>
-    </ion-card-content>
-  </ion-card>
-  <!--Appointments-->
-  <ion-card style="flex: 1; background-color: transparent; box-shadow: none;margin-top: 0px;"
-    *ngIf="ActiveUser.role == 'doctor' && appoint==true">
-    <ion-card-content style="padding: 0;overflow-y: scroll; max-height: calc(100%);">
-      <ion-card *ngFor="let pat of patientList; let i =index"
-        style=" background-color: #fff; flex: 1; margin: 5px 10px 10px 10px;">
-        <ion-card-content style="padding: 10px;">
-          <div class="cardcon">
-            <img src="../../assets/patient.svg" width="50px"
-              style="border-radius: 50%; background-color: #1a1a1a; padding: 5%;">
-            <div>
-              <p>{{pat.patientName}} </p>
-              <p>Dr. Name </p>
-              <span class="cardcon">
-                <p> {{today | date}}</p>
-                <p>
-                  11:30PM
-                </p>
-              </span>
-            </div>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-card-content>
-  </ion-card>
-
-
-  <!--Doctor List-->
-  <ion-card style="flex: 1; background-color: transparent; box-shadow: none; margin-top: 0px;"
-    *ngIf="ActiveUser.role == 'doctor' && doclist==true">
-    <ion-card-content style="padding: 0;overflow-y: scroll; max-height: calc(100%);">
-      <ion-searchbar (ionInput)="queryAcronyms($event)"></ion-searchbar>
-      <ion-card id="list" *ngFor="let doc of doctorList; let i =index"
-        style=" background-color: #fff; flex: 1; margin: 5px 10px 10px 10px;">
-        <ion-card-content style="padding: 10px;">
-          <div class="cardcon">
-            <img src="../../assets/patient.svg" width="50px"
-              style="border-radius: 50%; background-color: #1a1a1a; padding: 5%;">
-            <div>
-              <p>{{doc.doctorName}} </p>
-              <p>Dr. Name </p>
-              <span class="cardcon">
-                <p> {{today | date}}</p>
-                <p>
-                  11:30PM
-                </p>
-              </span>
-            </div>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-card-content>
-  </ion-card>
-  <!--Add Doctor-->
-  <ion-card style="flex: 1; background-color: transparent; box-shadow: none; margin-top: 0px;"
-    *ngIf="ActiveUser.role == 'doctor' && adddoc==true">
-    <ion-card-content style="padding: 0;overflow-y: scroll; max-height: calc(100%);">
-      <form #form="ngForm" (ngSubmit)="register(form)" style="padding: 15px;">
-        <div class="formfields">
-          <p>First Name</p>
-          <ion-input style="margin-bottom: 5px;" name="fname" type="name" placeholder="Enter first name" ngModel
-            required>
-          </ion-input>
-          <p>Last Name</p>
-          <ion-input style="margin-bottom: 5px;" name="lname" type="name" placeholder="Enter lst name" ngModel required>
-          </ion-input>
-          <p>Mobile Number</p>
-          <ion-input style="margin-bottom: 5px;" name="mobile" type="number" placeholder="Enter mobile number" ngModel
-            required>
-          </ion-input>
-          <p>Email ID</p>
-          <ion-input style="margin-bottom: 5px;" name="email" type="email" placeholder="Enter email ID" ngModel
-            required>
-          </ion-input>
-          <p>Username</p>
-          <ion-input style="margin-bottom: 5px;" name="username" type="name" placeholder="User Name" ngModel required>
-          </ion-input>
-          <p>Enter age</p>
-          <ion-input style="margin-bottom: 5px;" name="age" type="age" placeholder="Your age" ngModel>
-          </ion-input>
-          <p>Gender</p>
-          <ion-input style="margin-bottom: 5px;" name="gender" type="text" placeholder="Your Gender" ngModel>
-          </ion-input>
-          <p>Blood group</p>
-          <ion-input style="margin-bottom: 5px;" name="bloodgroup" type="text" placeholder="Blood group" ngModel>
-          </ion-input>
-          <p>Password</p>
-          <ion-input style="margin-bottom: 5px;" name="password" type="password" placeholder="Password" ngModel
-            required>
-          </ion-input>
-        </div>
-        <ion-card>
-          <ion-item color="tertiary">
-            <ion-label>Role</ion-label>
-            <ion-select [(ngModel)]="selectedrole" name="selectedrole" placeholder="Select One">
-              <ion-select-option value="doctor">Doctor</ion-select-option>
-              <ion-select-option value="patient">Patient</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item color="primary" *ngIf="selectedrole=='patient'">
-            <ion-label>Select Doctor</ion-label>
-            <ion-select [(ngModel)]="selecteddoctor" multiple="false" cancelText="Cancel" okText="Okay"
-              name="selecteddoctor">
-              <ion-select-option *ngFor="let doc of doctorList; let i=index;" [value]="doc.id">{{doc.doctorName}}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item color="secondary" *ngIf="selecteddoctor">
-            <ion-label>Select Game</ion-label>
-            <ion-select [(ngModel)]="selectedgame" multiple="true" cancelText="Cancel" okText="Okay"
-              name="selectedgame">
-              <ion-select-option *ngFor="let game of gameList; let i=index;" [value]="game.id">{{game.gameName}}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-card>
-        <ion-button color="primary" size="large" type="submit" [disabled]="form.invalid" expand="block">Register
-        </ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card>
+    <div
+      class="bg-gray-100 rounded-md mb-3 p-3"
+      (click)="onGameClick(item)"
+      *ngFor="let item of gameListDummy"
+    >
+      <div class="flex items-center justify-between">
+        <span class="text-sm"> {{item?.name}} </span>
+        <span><ion-icon name="chevron-forward-outline"></ion-icon> </span>
+      </div>
+    </div>
+  </section>
 </ion-content>
