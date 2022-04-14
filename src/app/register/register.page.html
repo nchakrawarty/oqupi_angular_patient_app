@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="primary" >
     <ion-buttons slot="start">
       <ion-back-button defaultHref="login"></ion-back-button>
     </ion-buttons>
@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="background">
+<ion-content padding class="">
   <!-- <form #form="ngForm" (ngSubmit)="login(form)">
     <ion-grid>
       <ion-row justify-content-center>
@@ -24,46 +24,103 @@
       </ion-row>
     </ion-grid>
   </form> -->
-  <form #form="ngForm" (ngSubmit)="register(form)" style="padding: 15px;">
-    <p>Already registered?<span> <a class="nav-item nav-link" routerLink="/login">Login Up</a></span>
+  <form #form="ngForm" (ngSubmit)="register(form)" style="padding: 15px">
+    <p class="text-sm">
+      Already registered?<span>
+        <a class="nav-item nav-link ml-2" routerLink="/login">Login</a></span
+      >
     </p>
     <div class="formfields">
-      <p>First Name</p>
-      <ion-input style="margin-bottom: 5px;" name="fname" type="name" placeholder="Enter first name" ngModel required>
+      <p class="text-xs mb-1">First Name</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="fname"
+        type="name"
+        placeholder="Enter first name"
+        ngModel
+        required
+      >
       </ion-input>
-      <p>Last Name</p>
-      <ion-input style="margin-bottom: 5px;" name="lname" type="name" placeholder="Enter lst name" ngModel required>
+      <p class="text-xs mb-1">Last Name</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="lname"
+        type="name"
+        placeholder="Enter lst name"
+        ngModel
+        required
+      >
       </ion-input>
-      <p>Mobile Number</p>
-      <ion-input style="margin-bottom: 5px;" name="mobile" type="number" placeholder="Enter mobile number" ngModel
-        required>
+      <p class="text-xs mb-1">Mobile Number</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="mobile"
+        type="number"
+        placeholder="Enter mobile number"
+        ngModel
+        required
+      >
       </ion-input>
-      <p>Email ID</p>
-      <ion-input style="margin-bottom: 5px;" name="email" type="email" placeholder="Enter email ID" ngModel required>
+      <p class="text-xs mb-1">Email ID</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="email"
+        type="email"
+        placeholder="Enter email ID"
+        ngModel
+        required
+      >
       </ion-input>
-      <p>Username</p>
-      <ion-input style="margin-bottom: 5px;" name="username" type="name" placeholder="User Name" ngModel required>
+      <p class="text-xs mb-1">Username</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="username"
+        type="name"
+        placeholder="User Name"
+        ngModel
+        required
+      >
       </ion-input>
-      <p>Enter age</p>
-      <ion-input style="margin-bottom: 5px;" name="age" type="age" placeholder="Your age" ngModel>
+      <p class="text-xs mb-1">Enter age</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="age"
+        type="age"
+        placeholder="Your age"
+        ngModel
+      >
       </ion-input>
-      <p>Gender</p>
-      <ion-input style="margin-bottom: 5px;" name="gender" type="text" placeholder="Your Gender" ngModel>
+      <p class="text-xs mb-1">Gender</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="gender"
+        type="text"
+        placeholder="Your Gender"
+        ngModel
+      >
       </ion-input>
-      <p>Blood group</p>
-      <ion-input style="margin-bottom: 5px;" name="bloodgroup" type="text" placeholder="Blood group" ngModel>
+      <p class="text-xs mb-1">Blood group</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="bloodgroup"
+        type="text"
+        placeholder="Blood group"
+        ngModel
+      >
       </ion-input>
-      <p>Password</p>
-      <ion-input style="margin-bottom: 5px;" name="password" type="password" placeholder="Password" ngModel required>
+      <p class="text-xs mb-1">Password</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="password"
+        type="password"
+        placeholder="Password"
+        ngModel
+        required
+      >
       </ion-input>
     </div>
 
-
-
-
-
-    <ion-card>
-      <!-- <ion-item color="primary" *ngIf="flag">
+    <!-- <ion-item color="primary" *ngIf="flag">
         <ion-label>Select Centers</ion-label>
         <ion-select [(ngModel)]="selectedcenters" multiple="true" cancelText="Cancel" okText="Okay"
           name="selectedcenters">
@@ -71,30 +128,77 @@
           </ion-select-option>
         </ion-select>
       </ion-item> -->
-      <ion-item color="tertiary">
+
+    <div class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3 pr-3">
+      <ion-select
+        [(ngModel)]="selectedrole"
+        name="selectedrole"
+        placeholder="Select Role"
+      >
+        <ion-select-option value="doctor">Doctor</ion-select-option>
+        <ion-select-option value="patient">Patient</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div
+      *ngIf="selectedrole=='patient'"
+      class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3 pr-3"
+    >
+      <ion-select
+        placeholder="Select Doctor"
+        [(ngModel)]="selecteddoctor"
+        multiple="false"
+        cancelText="Cancel"
+        okText="Okay"
+        name="selecteddoctor"
+      >
+        <ion-select-option
+          *ngFor="let doc of doctorList; let i=index;"
+          [value]="doc.id"
+          >{{doc.doctorName}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <div
+      *ngIf="selecteddoctor"
+      class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3 pr-3"
+    >
+      <ion-select
+        [(ngModel)]="selectedgame"
+        multiple="true"
+        cancelText="Cancel"
+        okText="Okay"
+        name="selectedgame"
+        placeholder="Select Game"
+      >
+        <ion-select-option
+          *ngFor="let game of gameList; let i=index;"
+          [value]="game.id"
+          >{{game.gameName}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <!-- <ion-item color="tertiary">
         <ion-label>Role</ion-label>
-        <ion-select [(ngModel)]="selectedrole" name="selectedrole" placeholder="Select One">
-          <ion-select-option value="doctor">Doctor</ion-select-option>
-          <ion-select-option value="patient">Patient</ion-select-option>
-        </ion-select>
       </ion-item>
-      <ion-item color="primary" *ngIf="selectedrole=='patient'">
+      <ion-item color="primary" >
         <ion-label>Select Doctor</ion-label>
-        <ion-select [(ngModel)]="selecteddoctor" multiple="false" cancelText="Cancel" okText="Okay"
-          name="selecteddoctor">
-          <ion-select-option *ngFor="let doc of doctorList; let i=index;" [value]="doc.id">{{doc.doctorName}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item color="secondary" *ngIf="selecteddoctor">
+      </ion-item> -->
+    <!-- 
+      <ion-item color="secondary" >
         <ion-label>Select Game</ion-label>
-        <ion-select [(ngModel)]="selectedgame" multiple="true" cancelText="Cancel" okText="Okay" name="selectedgame">
-          <ion-select-option *ngFor="let game of gameList; let i=index;" [value]="game.id">{{game.gameName}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-card>
-    <ion-button color="primary" size="large" type="submit" [disabled]="form.invalid" expand="block">Register
+      </ion-item> -->
+
+    <ion-button
+      color="primary"
+      mode="ios"
+      size="medium"
+      type="submit"
+      [disabled]="form.invalid"
+      expand="block"
+      >Register
     </ion-button>
   </form>
 </ion-content>
