@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <header class="flex p-4 items-center justify-between">
+    <div>
+      <ion-icon
+        sstyle="font-size: 1.2em;"
+        (click)="closeModalNodata()"
+        name="chevron-back-outline"
+      >
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-icon>
+    </div>
+    <div class="text-center flex-1">
+      <h3 class="text-lg m-0">Previous Appointment</h3>
+    </div>
+    <div>
+      <ion-icon class="text-lg" name="notifications-outline"></ion-icon>
+    </div>
+  </header>
+</ion-header>
+
+<ion-content>
+  <section class="p-4" *ngIf="appointmentList">
+    <div
+      *ngFor="let pat of appointmentList; let i = index"
+      class="bg-gray-100 rounded-lg p-4 flex items-center mb-3 border-l-8 border-green-600"
+      style="
+        background: #f3f4f6 url(../../assets/doc-bg.png) no-repeat right bottom;
+      "
+    >
+      <img
+        class="w-10 h-10 rounded-full mr-3"
+        src="../../assets/patient-{{ i + 1 }}.png"
+      />
+
+      <div class="space-y-0">
+        <h4 class="m-0 text-sm font-medium">{{ pat?.name }}</h4>
+        <p class="flex items-center space-x-1 text-sm text-opacity-75">
+          <span> Physiotherapist </span>
+        </p>
+
+        <span class="space-x-2 flex">
+          <p class="flex items-center space-x-1 text-xs text-opacity-75">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>12 Jan 2022</span>
+          </p>
+          <p class="flex items-center space-x-1 text-xs">
+            <ion-icon name="time-outline"></ion-icon>
+            <span> 5:00 Pm</span>
+          </p>
+        </span>
+      </div>
+    </div>
+  </section>
+</ion-content>

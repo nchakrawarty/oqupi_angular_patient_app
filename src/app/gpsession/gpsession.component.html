@@ -1,0 +1,213 @@
+<ion-header class="ion-no-border">
+  <header class="flex p-4 items-center justify-between">
+    <div>
+      <ion-icon
+        sstyle="font-size: 1.2em;"
+        (click)="closeModalNodata()"
+        name="chevron-back-outline"
+      >
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-icon>
+    </div>
+    <div class="text-center flex-1">
+      <h3 class="text-lg m-0">{{ modalTitle }}</h3>
+    </div>
+    <div>
+      <ion-icon class="text-lg" name="notifications-outline"></ion-icon>
+    </div>
+  </header>
+</ion-header>
+
+<ion-content>
+  <section class="p-4">
+    <div
+      *ngFor="let sess of allsessions; let i = index"
+      class="bg-gray-100 p-3 mb-3 rounded-lg"
+    >
+      <div class="flex justify-between items-center">
+        <span class="font-medium"> {{ sess?.name }} </span>
+        <span class="text-sm"> 12 May 2022 </span>
+      </div>
+
+      <div class="flex justify-between mt-5">
+        <div class="flex flex-col items-center">
+          <span class="text-xs">change from last activity</span>
+          <span class="text-xs flex items-center mt-1"
+            >15%
+            <ion-icon name="caret-up" class="text-green-500 text-sm"></ion-icon
+          ></span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xs">Duration</span>
+          <span class="text-xs flex items-center mt-1">2:20</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xs">Score</span>
+          <span class="text-xs flex items-center mt-1">800</span>
+        </div>
+        <div>
+          <span class="text-center"
+            ><br />
+            <ion-icon
+              *ngIf="showIndex != i"
+              name="chevron-down-outline"
+              (click)="showIndex = i"
+            ></ion-icon>
+            <ion-icon
+              *ngIf="showIndex === i"
+              name="chevron-up-outline"
+              (click)="showIndex = null"
+            ></ion-icon>
+          </span>
+        </div>
+      </div>
+
+      <ng-container *ngIf="showIndex === i">
+        <div class="mt-5">
+          <h5 class="text-sm m-0 mb-3">Game Results</h5>
+          <div class="flex gap-3">
+            <div class="text-center flex-1">
+              <span class="text-xs text-gray-500">Success</span>
+              <div class="bg-gray-200 p-3 rounded-lg text-sm">
+                95%
+
+                <ion-icon
+                  name="caret-up"
+                  class="text-green-500 text-sm"
+                ></ion-icon>
+              </div>
+            </div>
+            <div class="text-center flex-1">
+              <span class="text-xs text-gray-500">No. of Mistakes</span>
+              <div class="bg-gray-200 p-3 rounded-lg text-sm">
+                10
+
+                <ion-icon
+                  name="caret-up"
+                  class="text-green-500 text-sm"
+                ></ion-icon>
+              </div>
+            </div>
+            <div class="text-center flex-1">
+              <span class="text-xs text-gray-500">No. of Misses</span>
+              <div class="bg-gray-200 p-3 rounded-lg text-sm">
+                5
+                <ion-icon
+                  name="caret-up"
+                  class="text-green-500 text-sm"
+                ></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <h5 class="text-sm m-0 mb-3">Performance</h5>
+          <div class="flex gap-3">
+            <div class="text-center flex-1">
+              <span class="text-xs text-gray-500">Accuracy Left</span>
+              <div class="bg-gray-200 p-3 rounded-lg text-sm">
+                34%
+                <ion-icon
+                  name="caret-up"
+                  class="text-green-500 text-sm"
+                ></ion-icon>
+              </div>
+            </div>
+            <div class="text-center flex-1">
+              <span class="text-xs text-gray-500">Accuracy Right</span>
+              <div class="bg-gray-200 p-3 rounded-lg text-sm">
+                33.3%
+                <ion-icon
+                  name="caret-up"
+                  class="text-green-500 text-sm"
+                ></ion-icon>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-3 mt-3">
+            <div class="text-center flex-1">
+              <span class="text-xs text-gray-500">Reaction time left</span>
+              <div class="bg-gray-200 p-3 rounded-lg text-sm">
+                1.3 sec
+                <ion-icon
+                  name="caret-up"
+                  class="text-green-500 text-sm"
+                ></ion-icon>
+              </div>
+            </div>
+            <div class="text-center flex-1">
+              <span class="text-xs text-gray-500">Reaction time right</span>
+              <div class="bg-gray-200 p-3 rounded-lg text-sm">
+                1.3 sec
+                <ion-icon
+                  name="caret-up"
+                  class="text-green-500 text-sm"
+                ></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+
+  <!-- <ion-card color="medium" *ngFor="let sess of allsessions; let i = index">
+    <ion-card-header>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          align-content: center;
+        "
+      >
+        <span> Session {{ i + 1 }} </span>
+        <span> {{ sess.sessionDateTime }} </span>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          align-content: center;
+        "
+      >
+        <span style="text-align: center"
+          >change from last activity<br />
+          15%</span
+        >
+        <span style="text-align: center"
+          >Duration <br />
+          2:20</span
+        >
+        <span style="text-align: center"
+          >Score<br />
+          800</span
+        >
+        <span style="text-align: center"
+          ><br />
+          <ion-icon
+            *ngIf="!show"
+            name="chevron-down-outline"
+            (click)="show = !show"
+          ></ion-icon>
+          <ion-icon
+            *ngIf="show"
+            name="chevron-up-outline"
+            (click)="show = !show"
+          ></ion-icon>
+        </span>
+      </div>
+      <div *ngIf="show">
+        {{ sess | json }}
+      </div>
+    </ion-card-content>
+  </ion-card> -->
+</ion-content>
+<ion-footer></ion-footer>

@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Urls } from '../constants/urls';
+import { Component, OnInit } from "@angular/core";
+import { Urls } from "../constants/urls";
 import { HttpClient } from "@angular/common/http";
-import { ModalController, NavParams } from '@ionic/angular';
-import { ImagemodalComponent } from '../imagemodal/imagemodal.component';
-import { ToastController } from '@ionic/angular';
-import { AuthService } from '../auth.service';
-
+import { ModalController, NavParams } from "@ionic/angular";
+import { ImagemodalComponent } from "../imagemodal/imagemodal.component";
+import { ToastController } from "@ionic/angular";
+import { AuthService } from "../auth.service";
+import { PreviousAppointmentsComponent } from "../previous-appointments/previous-appointments.component";
+import { PrescribedGamesComponent } from "../prescribed-games/prescribed-games.component";
 
 @Component({
-  selector: 'app-media',
-  templateUrl: './media.page.html',
-  styleUrls: ['./media.page.scss'],
+  selector: "app-media",
+  templateUrl: "./media.page.html",
+  styleUrls: ["./media.page.scss"],
 })
 export class MediaPage implements OnInit {
   images: any;
@@ -19,28 +20,37 @@ export class MediaPage implements OnInit {
   ActiveUser: any;
   today = Date.now();
 
-  notifications = ["Your next session is tommorow 12:10 AM", "You can complete session till 12:20 AM", "Login into Oculus", "Todays was your best score till now, keep going", "Your next session is tommorow 12:10 AM"];
+  notifications = [
+    "Your next session is tommorow 12:10 AM",
+    "You can complete session till 12:20 AM",
+    "Login into Oculus",
+    "Todays was your best score till now, keep going",
+    "Your next session is tommorow 12:10 AM",
+  ];
   constructor(
     private authService: AuthService,
     public toastController: ToastController,
-    private http: HttpClient, public modalController: ModalController,
-  ) { }
+    private http: HttpClient,
+    public modalController: ModalController
+  ) {}
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.http.get(`${Urls.ACCOUNT}/${this.user.userId}?access_token=${this.user.id}`).subscribe((res: any) => {
-      this.ActiveUser = res;
-      console.log(res)
-      this.ActiveUser.AccountName = res.username;
-      this.ActiveUser.role = res.role;
-      this.ActiveUser.DOB = res.DOB;
-    })
+    this.user = JSON.parse(localStorage.getItem("currentUser"));
+    this.http
+      .get(`${Urls.ACCOUNT}/${this.user.userId}?access_token=${this.user.id}`)
+      .subscribe((res: any) => {
+        this.ActiveUser = res;
+        console.log(res);
+        this.ActiveUser.AccountName = res.username;
+        this.ActiveUser.role = res.role;
+        this.ActiveUser.DOB = res.DOB;
+      });
 
     // this.http.get(`${Urls.FILES}/images/files`).subscribe(res => {
     //   console.log(res);
     //   this.images = res;
     // })
-    this.ionViewWillEnter()
+    this.ionViewWillEnter();
   }
 
   ionViewWillEnter() {
@@ -57,15 +67,13 @@ export class MediaPage implements OnInit {
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
-      console.log('Async operation has ended');
+      console.log("Async operation has ended");
       event.target.complete();
     }, 2000);
-
   }
   LogOut() {
     this.authService.logout(this.user);
     window.location.reload();
-
   }
   // onSelectImage(ev, i, im) {
   //   console.log(ev, i);
@@ -100,4 +108,24 @@ export class MediaPage implements OnInit {
   //   toast.present();
   // }
 
+  settingType = {
+    prescribedGames: "prescribedGames",
+    previousAppointment: "previousAppointment",
+  };
+
+  async onSettingItemClick(game) {
+    console.log(game);
+    if (game === this.settingType.previousAppointment) {
+      const modal = await this.modalController.create({
+        component: PreviousAppointmentsComponent,
+      });
+      return await modal.present();
+    }
+    if (game === this.settingType.prescribedGames) {
+      const modal = await this.modalController.create({
+        component: PrescribedGamesComponent,
+      });
+      return await modal.present();
+    }
+  }
 }
