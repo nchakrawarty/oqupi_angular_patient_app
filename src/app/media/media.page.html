@@ -43,6 +43,28 @@
     </div>
   </section>
 
+  <section class="px-4">
+    <div
+      class="bg-gray-100 rounded-md mb-3 p-3"
+      (click)="onSettingItemClick('previousAppointment')"
+    >
+      <div class="flex items-center justify-between">
+        <span class="text-sm"> Previous Appointments </span>
+        <span><ion-icon name="chevron-forward-outline"></ion-icon> </span>
+      </div>
+    </div>
+
+    <div
+      class="bg-gray-100 rounded-md mb-3 p-3"
+      (click)="onSettingItemClick('prescribedGames')"
+    >
+      <div class="flex items-center justify-between">
+        <span class="text-sm"> Prescribed Games </span>
+        <span><ion-icon name="chevron-forward-outline"></ion-icon> </span>
+      </div>
+    </div>
+  </section>
+
   <div class="px-4">
     <ion-button
       size="medium"

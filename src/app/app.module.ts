@@ -23,6 +23,8 @@ import { AddcenterPipe } from "./addcenter.pipe";
 import { TimePipe } from "./pipes/time.pipe";
 import { NativePageTransitions } from "@ionic-native/native-page-transitions/ngx";
 import { GpsessionComponent } from "./gpsession/gpsession.component";
+import { PrescribedGamesComponent } from "./prescribed-games/prescribed-games.component";
+import { PreviousAppointmentsComponent } from "./previous-appointments/previous-appointments.component";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { GpsessionComponent } from "./gpsession/gpsession.component";
     AddcenterPipe,
     TimePipe,
     GpsessionComponent,
+    PrescribedGamesComponent,
+    PreviousAppointmentsComponent,
   ],
   entryComponents: [],
   imports: [
