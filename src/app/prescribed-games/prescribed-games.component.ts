@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from '@ionic/angular';
+import { ModalController } from "@ionic/angular";
 
 @Component({
   selector: "app-prescribed-games",
@@ -7,6 +7,11 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ["./prescribed-games.component.scss"],
 })
 export class PrescribedGamesComponent implements OnInit {
+  ratings: any = [
+    { name: "General" },
+    { name: "Standard" },
+    { name: "Hard" },
+  ];
   constructor(private modalController: ModalController) {}
 
   ngOnInit() {}
