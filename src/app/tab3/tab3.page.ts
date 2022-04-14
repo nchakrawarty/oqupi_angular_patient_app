@@ -51,8 +51,8 @@ export class Tab3Page {
       } while (this.colors.indexOf(color) >= 0);
       this.colors.push(
         "#" +
-          "ffffff" /* + color.toString(16)*/
-            .slice(-6)
+        "ffffff" /* + color.toString(16)*/
+          .slice(-6)
       );
     }
     this.ActiveUser = {
@@ -137,7 +137,7 @@ export class Tab3Page {
       slowdownfactor: -1,
       iosdelay: 50,
     };
-    this.nativePageTransitions.slide(options);
+    // this.nativePageTransitions.slide(options);
     this.http
       .get(`${Urls.ACCOUNT}/${this.user.userId}?access_token=${this.user.id}`)
       .subscribe((res: any) => {

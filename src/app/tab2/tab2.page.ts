@@ -113,7 +113,7 @@ export class Tab2Page {
       slowdownfactor: -1,
       iosdelay: 50
     }
-    this.nativePageTransitions.slide(options);
+    // this.nativePageTransitions.slide(options);
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.http.get(`${Urls.ACCOUNT}/${this.user.userId}?access_token=${this.user.id}`).subscribe((res: any) => {
       this.ActiveUser = res;
