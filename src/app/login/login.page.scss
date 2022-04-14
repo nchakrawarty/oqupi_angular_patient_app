@@ -6,9 +6,16 @@ ion-button{
     --background: #062f77;
 }
 ion-content.background {
-    --background: url(../../assets/Landing-page.png) 0 0/100% 100% no-repeat;
+    // --background: url(../../assets/Landing-page.png) 0 0/100% 100% no-repeat;
     // background-size: contain; background-repeat: no-repeat;
 }
+.wrapper {
+    background: url(../../assets/Landing-page.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: bottom;
+    height: 100%;
+  }
 // a{
 //     color: #fff;
 // }
