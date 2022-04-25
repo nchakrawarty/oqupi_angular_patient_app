@@ -191,9 +191,14 @@ export class Tab3Page {
     this.adddc = "not-active";
     this.doclc = "not-active";
     this.appointc = "active";
-    this.http.get(`${Urls.PATIENT}`).subscribe((res: any) => {
+    this.http.get(`${Urls.PATIENT}?filter[where][email]=${this.ActiveUser?.email}`).subscribe((res: any) => {
+      // this.http.get(`${Urls.PATIENT}`).subscribe((res: any) => {
       this.patientList = res;
       console.log(this.patientList);
+      this.http.get(`${Urls.PATIENT}/${this.patientList[0].id}/gamesPrescribeds`).subscribe(res => {
+        console.log(res)
+        this.gameList = res;
+      })
     });
   }
   /*------------------------------------------------------*/

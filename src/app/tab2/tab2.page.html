@@ -14,55 +14,35 @@
 </ion-header>
 
 <ion-content style="margin-top: 10px;">
-  <ion-refresher
-    spellcheck="z-index:9999"
-    slot="fixed"
-    pullFactor="0.5"
-    pullMin="100"
-    pullMax="200"
-    (ionRefresh)="doRefresh($event)"
-  >
+  <ion-refresher spellcheck="z-index:9999" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200"
+    (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <ng-container *ngIf="addpc">
-    <section class="p-4"     *ngIf="ActiveUser.role == 'Patient'">
+    <section class="p-4" *ngIf="ActiveUser.role == 'Patient'">
       <div class="flex justify-between items-center mb-5">
         <h6 class="m-0 font-semibold flex items-center text-sm">
           <ion-icon name="calendar-outline" class="text-md mr-1"></ion-icon>
           Upcoming Appointments
         </h6>
-        <ion-datetime
-          (ionChange)="calcStartEndTime($event)"
-          placeholder="View Calendar"
-          [value]="td"
-          class="rounded-full text-xs bg-blue-400 px-4 text-white"
-        >
+        <ion-datetime (ionChange)="calcStartEndTime($event)" placeholder="View Calendar" [value]="td"
+          class="rounded-full text-xs bg-blue-400 px-4 text-white">
         </ion-datetime>
       </div>
 
       <div class="flex justify-between mb-4">
-        <span
-          class="bg-gray-300 w-10 h-10 text-xs rounded-md flex items-center justify-center"
-          *ngFor="let dt of appointmentDateView; let i = index;"
-          (click)="changeDate($event,dt,i);"
-          [id]="i"
-          >{{dt | date:'dd'}}</span
-        >
+        <span class="chdt bg-gray-300 w-10 h-10 text-xs rounded-md flex items-center justify-center"
+          *ngFor="let dt of appointmentDateView; let i = index;" (click)="changeDate($event,dt,i);" [id]="i">{{dt |
+          date:'dd'}}</span>
       </div>
 
-      <div
-        *ngFor="let pat of appointmentList; let i =index"
-        class="bg-gray-100 rounded-lg p-4 flex items-center mb-3 border-l-8 border-green-600"
-        style="
+      <div *ngFor="let pat of appointmentList; let i =index"
+        class="bg-gray-100 rounded-lg p-4 flex items-center mb-3 border-l-8 border-green-600" style="
           background: #f3f4f6 url(../../assets/doc-bg.png) no-repeat right
             bottom;
-        "
-      >
-        <img
-          class="w-10 h-10 rounded-full mr-3"
-          src="../../assets/patient-{{i+1}}.png"
-        />
+        ">
+        <img class="w-10 h-10 rounded-full mr-3" src="../../assets/patient-{{i+1}}.png" />
 
         <div class="space-y-0">
           <h4 class="m-0 text-sm font-medium">Dr. {{pat.doctorName}}</h4>
@@ -209,19 +189,14 @@
   </div>
 
   <ion-fab *ngIf="addpc" slot="fixed" style="bottom: 20px; right: 15px">
-    <ion-fab-button
-      color="primary"
-      style="
+    <ion-fab-button color="primary" style="
         width: 200px;
         height: 40px;
         --border-radius: 24px;
         --box-shadow: none;
-      "
-      (click)="addPat();"
-    >
+      " (click)="addPat();">
       <div class="flex items-center text-xs">
-        <ion-icon name="medkit"></ion-icon
-        ><span class="ml-1">Request appointment</span>
+        <ion-icon name="medkit"></ion-icon><span class="ml-1">Request appointment</span>
       </div>
     </ion-fab-button>
   </ion-fab>
@@ -236,38 +211,17 @@
       <div class="bg-gray-100 rounded-lg p-3 my-3">
         <form #form="ngForm" (ngSubmit)="addAppointmentIn(form)">
           <div class="bg-gray-300 rounded-md px-2 mb-2">
-            <ion-select
-              class="text-xs px-0 flex-grow"
-              placeholder="click Doctor"
-              [(ngModel)]="selecteddoctor"
-              multiple="false"
-              cancelText="Cancel"
-              okText="Okay"
-              name="selecteddoctor"
-              required
-            >
-              <ion-select-option
-                *ngFor="let doc of doctorList; let i=index;"
-                [value]="doc"
-              >
+            <ion-select class="text-xs px-0 flex-grow" placeholder="click Doctor" [(ngModel)]="selecteddoctor"
+              multiple="false" cancelText="Cancel" okText="Okay" name="selecteddoctor" required>
+              <ion-select-option *ngFor="let doc of doctorList; let i=index;" [value]="doc">
                 {{doc.doctorName}}
               </ion-select-option>
             </ion-select>
           </div>
 
-          <div
-            class="flex items-center justify-between bg-gray-300 rounded-md px-2 mb-2"
-          >
-            <ion-datetime
-              class="text-xs px-0 flex-grow"
-              displayFormat="MMM DD, YYYY"
-              name="appointmentDate"
-              [min]="min"
-              max="2050-12-09"
-              placeholder="{{today | date:'yyyy-MM-dd'}}"
-              ngModel
-              required
-            >
+          <div class="flex items-center justify-between bg-gray-300 rounded-md px-2 mb-2">
+            <ion-datetime class="text-xs px-0 flex-grow" displayFormat="MMM DD, YYYY" name="appointmentDate" [min]="min"
+              max="2050-12-09" placeholder="{{today | date:'yyyy-MM-dd'}}" ngModel required>
             </ion-datetime>
             <ion-icon name="calendar" class="text-gray-400"></ion-icon>
           </div>
@@ -294,46 +248,22 @@
           </div> -->
 
           <div class="flex flex-col my-5">
-            <span class="text-xs font-bold mb-3"
-              >Choose one of available time slot</span
-            >
+            <span class="text-xs font-bold mb-3">Choose one of available time slot</span>
 
             <div *ngIf="selecteddoctor" class="flex flex-wrap gap-2">
-              <div
-                *ngFor="let t of timeslot; let i=index;"
-                class="bg-gray-300 p-1 px-5 flex-1 rounded-lg"
-                [ngModel]="selection"
-                name="appintmentTime"
-                type="text"
-                (click)="clickFunction($event, t,i)"
-              >
+              <div *ngFor="let t of timeslot; let i=index;" class="bg-gray-300 p-1 px-5 flex-1 rounded-lg"
+                [ngModel]="selection" name="appintmentTime" type="text" (click)="clickFunction($event, t,i)">
                 <span [class.highlight]="statusClass" class="text-xs">
-                  {{t}}</span
-                >
+                  {{t}}</span>
               </div>
             </div>
           </div>
 
           <div class="flex flex-col">
-            <ion-button
-              mode="ios"
-              style="--box-shadow: none"
-              color="primary"
-              type="submit"
-              [disabled]="form.invalid"
-              expand="block"
-              class="text-sm rounded-md"
-              >Submit Appointment</ion-button
-            >
-            <ion-button
-              mode="ios"
-              style="--box-shadow: none"
-              color="light"
-              size="small"
-              type="button"
-              (click)="skip()"
-              expand="block"
-            >
+            <ion-button mode="ios" style="--box-shadow: none" color="primary" type="submit" [disabled]="form.invalid"
+              expand="block" class="text-sm rounded-md">Submit Appointment</ion-button>
+            <ion-button mode="ios" style="--box-shadow: none" color="light" size="small" type="button" (click)="skip()"
+              expand="block">
               SKIP
             </ion-button>
           </div>

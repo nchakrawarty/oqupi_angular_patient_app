@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { ModalController, NavParams } from "@ionic/angular";
+import { Urls } from "../constants/urls";
 
 @Component({
   selector: "app-gpsession",
@@ -16,6 +17,7 @@ export class GpsessionComponent implements OnInit {
   show: boolean;
   showIndex: number = null;
   prescribedGameId: any;
+  sessionDetails: any;
   allsessions: any = [
     {
       name: "Session 1",
@@ -32,14 +34,20 @@ export class GpsessionComponent implements OnInit {
     private modalController: ModalController,
     public navParams: NavParams,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.show = false;
     console.log(this.navParams);
-    this.modalTitle = this.navParams?.data?.name;
+    this.modalTitle = this.navParams?.data?.gameName;
+    this.getSessionDetails();
   }
-
+  getSessionDetails() {
+    this.http.get(`${Urls.PRESCRIBEDGAME}/${this.navParams?.data.id}/sessionDetails`).subscribe(res => {
+      console.log(res)
+      this.sessionDetails = res;
+    })
+  }
   async closeModal() {
     // this.dataValue[this.navParams.data.name] = this.modelValue;
     this.dataValue.value = this.modelValue;

@@ -125,6 +125,7 @@ export class Tab2Page {
 
     this.patList();
     this.getDoc();
+    this.changeDate("event", this.appointmentDateView[0], 1)
 
   }
   sendEmail() {
@@ -144,13 +145,18 @@ export class Tab2Page {
     this.http.get(`${Urls.PATIENT}?filter[where][email]=${this.ActiveUser.email}`).subscribe((res: any) => {
       this.patientList = res;
       console.log(this.patientList)
-      this.http.get(`${Urls.PATIENT}/${this.patientList[0]?.id}/appointments?filter[order]=appointmentDate DESC`).subscribe((res: any) => {
+      this.getAppointment()
+
+    })
+  }
+  getAppointment() {
+    if (this.patientList[0]) {
+      this.http.get(`${Urls.PATIENT}/${this.patientList[0]?.id}/appointments?filter[where][and][0][appointmentDate]=${this.td}&[order]=appointmentDate DESC`).subscribe((res: any) => {
         console.log("Appointments", res)
         this.appointmentList = res;
       })
-    })
+    }
   }
-
   /*------------------------------------ Appointments---------------------------------------*/
   appointc = "not-active";
   appointments() {
@@ -263,6 +269,7 @@ export class Tab2Page {
     }
     this.ngOnInit()
   }
+
   calcStartEndTime(d) {
     var cc = Array.from(document.getElementsByClassName('chdt') as HTMLCollectionOf<HTMLElement>)
     // cc[i].style.backgroundColor = '';
@@ -276,9 +283,9 @@ export class Tab2Page {
     }
     console.log(d)
     var y = this.datePipe.transform(d.detail.value, "yyyy-MM-dd")
-    console.log(x)
+    console.log(y)
     this.td = y;
-    // this.getAppointment();
+    this.getAppointment();
   }
   i: any;
   changeDate(event, e, i) {

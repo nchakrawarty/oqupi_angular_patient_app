@@ -14,28 +14,17 @@
 </ion-header>
 
 <ion-content style="margin-top: 10px">
-  <ion-refresher
-    spellcheck="z-index:9999"
-    slot="fixed"
-    pullFactor="0.5"
-    pullMin="100"
-    pullMax="200"
-    (ionRefresh)="doRefresh($event)"
-  >
+  <ion-refresher spellcheck="z-index:9999" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200"
+    (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <section
-    class="thumb-section my-5 m-auto"
-    *ngIf="ActiveUser.role == 'Patient'"
-  >
+  <section class="thumb-section my-5 m-auto" *ngIf="ActiveUser.role == 'Patient'">
     <div class="overflow-hidden pb-2">
       <div class="p-4 pb-0">
         <h3>Active Games</h3>
         <h1>{{patientList?.length}}</h1>
-        <span style="color: green"
-          >5.25% <ion-icon style="font-size: 8px" name="triangle"></ion-icon
-        ></span>
+        <span style="color: green">5.25% <ion-icon style="font-size: 8px" name="triangle"></ion-icon></span>
       </div>
 
       <img src="../../assets/line-green.png" alt="" />
@@ -44,9 +33,7 @@
       <div class="p-4 pb-0">
         <h3>Total Games</h3>
         <h1>{{patientList?.length}}</h1>
-        <span style="color: green"
-          >3.25%<ion-icon style="font-size: 8px" name="triangle"></ion-icon
-        ></span>
+        <span style="color: green">3.25%<ion-icon style="font-size: 8px" name="triangle"></ion-icon></span>
       </div>
 
       <img src="../../assets/line-green.png" alt="" />
@@ -59,23 +46,15 @@
         <!-- <ion-icon name="layers-outline" class="text-lg mr-1"></ion-icon> -->
         Select Date
       </h6>
-      <ion-datetime
-        (ionChange)="calcStartEndTime($event)"
-        placeholder="View Calendar"
-        [value]="td"
-        class="rounded-full text-xs bg-blue-400 px-4 text-white"
-      >
+      <ion-datetime (ionChange)="calcStartEndTime($event)" placeholder="View Calendar" [value]="td"
+        class="rounded-full text-xs bg-blue-400 px-4 text-white">
       </ion-datetime>
     </div>
 
     <div class="flex justify-between">
-      <span
-        class="bg-gray-300 w-10 h-10 text-xs rounded-md flex items-center justify-center"
-        *ngFor="let dt of appointmentDateView; let i = index;"
-        (click)="changeDate($event,dt,i);"
-        [id]="i"
-        >{{dt | date:'dd'}}</span
-      >
+      <span class="chdt bg-gray-300 w-10 h-10 text-xs rounded-md flex items-center justify-center"
+        *ngFor="let dt of appointmentDateView; let i = index;" (click)="changeDate($event,dt,i);" [id]="i">{{dt |
+        date:'dd'}}</span>
     </div>
   </section>
 
@@ -87,14 +66,11 @@
 
     <div *ngFor="let pat of gamesPrescribed; let i =index">
       <ng-container *ngFor="let dates of pat.gameDates; let i =index">
-        <div
-          *ngIf="dates==td"
-          class="bg-gray-100 rounded-lg p-4 flex items-center mb-3 border-l-8 border-green-600"
+        <div *ngIf="dates==td" class="bg-gray-100 rounded-lg p-4 flex items-center mb-3 border-l-8 border-green-600"
           style="
             background: #f3f4f6 url(../../assets/doc-bg.png) no-repeat right
               bottom;
-          "
-        >
+          ">
           <div class="mr-2">
             <ion-icon name="body-outline" class="text-2xl"></ion-icon>
           </div>

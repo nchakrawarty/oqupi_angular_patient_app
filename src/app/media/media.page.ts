@@ -19,7 +19,7 @@ export class MediaPage implements OnInit {
   urls = Urls;
   ActiveUser: any;
   today = Date.now();
-
+  patientList: any;
   notifications = [
     "Your next session is tommorow 12:10 AM",
     "You can complete session till 12:20 AM",
@@ -32,7 +32,7 @@ export class MediaPage implements OnInit {
     public toastController: ToastController,
     private http: HttpClient,
     public modalController: ModalController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("currentUser"));
@@ -44,6 +44,10 @@ export class MediaPage implements OnInit {
         this.ActiveUser.AccountName = res.username;
         this.ActiveUser.role = res.role;
         this.ActiveUser.DOB = res.DOB;
+        this.http.get(`${Urls.PATIENT}?filter[where][email]=${this.ActiveUser?.email}`).subscribe((res: any) => {
+          this.patientList = res;
+          console.log(this.patientList)
+        })
       });
 
     // this.http.get(`${Urls.FILES}/images/files`).subscribe(res => {
@@ -124,6 +128,7 @@ export class MediaPage implements OnInit {
     if (game === this.settingType.prescribedGames) {
       const modal = await this.modalController.create({
         component: PrescribedGamesComponent,
+        componentProps: this.patientList
       });
       return await modal.present();
     }

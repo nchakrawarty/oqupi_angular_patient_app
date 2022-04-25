@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { ModalController, NavParams } from "@ionic/angular";
+import { HttpClient } from "@angular/common/http";
+import { Urls } from '../constants/urls';
 
 @Component({
   selector: "app-prescribed-games",
@@ -12,11 +14,24 @@ export class PrescribedGamesComponent implements OnInit {
     { name: "Standard" },
     { name: "Hard" },
   ];
-  constructor(private modalController: ModalController) {}
+  prescribedGameList: any;
+  constructor(private modalController: ModalController,
+    private http: HttpClient,
+    public navParams: NavParams
+  ) {
+    console.log(navParams.data[0])
+    this.http.get(`${Urls.PATIENT}/${navParams.data[0].id}/gamesPrescribeds`).subscribe(res => {
+      console.log(res)
+      this.prescribedGameList = res;
+    })
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   async closeModalNodata() {
+    console.log()
     await this.modalController.dismiss();
   }
 }
